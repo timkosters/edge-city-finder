@@ -25,7 +25,7 @@ interface Property {
   source_type: string;
 }
 
-const API_BASE_URL = 'http://localhost:8000';
+const API_BASE_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:8000';
 
 type TabType = 'qualified' | 'interesting';
 
@@ -106,7 +106,8 @@ export default function Home() {
     if (!initialLoading) {
       loadProperties(activeTab);
     }
-  }, [activeTab]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [activeTab, initialLoading]);
 
   const runScoutAgent = async () => {
     setLoading(true);
